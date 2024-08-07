@@ -1,0 +1,26 @@
+@mixin main_button {
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  background-color: $base_color;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  &:hover {
+    background-color: $hover_color;
+    color: white;
+  }
+}
+@mixin home_post_container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffc0;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+}

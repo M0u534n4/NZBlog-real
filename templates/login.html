@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% set hide_header = true %} {% block title %}Login{%
+endblock %} {% block content %}
+<section class="login-s">
+  <div class="container">
+    <h2>Login</h2>
+    <form class="login-form" method="POST" action="{{ url_for('login') }}">
+      {{ form.hidden_tag() }}
+      <div class="form-item">
+        {{ form.email(size=32, class="input", placeholder="Email") }} {% if
+        form.email.errors %}
+        <ul>
+          {% for error in form.email.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div class="form-item">
+        {{ form.password(size=32, class="input", placeholder="Password") }} {%
+        if form.password.errors %}
+        <ul>
+          {% for error in form.password.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div class="remember-box">
+        {{ form.remember }} {{ form.remember.label(class_='remember-label') }}
+      </div>
+      {{ form.submit(class_='submit-button') }}
+    </form>
+    <p>
+      Don't have an account?<a href="{{ url_for('register') }}"
+        >register here</a
+      >
+    </p>
+  </div>
+</section>
+{% endblock %}

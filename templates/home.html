@@ -1,0 +1,305 @@
+{% extends "base.html" %} {% block content %}
+<section class="home-s-1">
+  <div class="container">
+    <div class="poster-div">
+      <form method="post" enctype="multipart/form-data">
+        <img
+          src="{{ url_for('static', filename='images/user_male.png') }}"
+          alt=""
+        />
+        {{ form.hidden_tag() }} {{ form.content(placeholder="Write your text
+        post here", id="contentInput") }}
+        <button type="button" id="fileButton">
+          <i class="fa-solid fa-images"></i>
+        </button>
+        {{ form.submit(class="post-button", id="postButton",
+        disabled="disabled") }}
+      </form>
+      <div class="file-upload-container">
+        <p id="fileCount">No files selected</p>
+        <div id="filePreviews" class="file-previews"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="home-s-2">
+  {% for post in posts.items %}
+  <div class="container">
+    <div class="post-user">
+      <img
+        src="{{ url_for('static', filename='images/user_male.png') }}"
+        alt=""
+      />
+      <h2>
+        <a href="{{ url_for('user_profile', username=post.author.username) }}"
+          >{{ post.author.username }}</a
+        >
+      </h2>
+    </div>
+    <div class="post-div">
+      <div class="discr-div">
+        <p>{{ post.content }}</p>
+      </div>
+      {% if post.image_file %}
+      <div class="post-img-div">
+        <img
+          src="{{ url_for('static', filename='uploads/' + post.image_file) }}"
+          alt="Post Image"
+        />
+      </div>
+      {% elif post.video_file %}
+      <div class="post-video-div">
+        <video controls>
+          <source
+            src="{{ url_for('static', filename='uploads/' + post.video_file) }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      {% endif %}
+    </div>
+    <div class="reaction-div">
+      <button><i class="fa-regular fa-heart"></i></button>
+      <button><i class="fa-regular fa-comment"></i></button>
+      <button><i class="fa-solid fa-share"></i></button>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<!-- Modal Structure -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <button class="prev">&lt;</button>
+    <div id="modalMediaContainer">
+      <img id="modalImage" class="modal-image" src="" alt="Large View" />
+      <video id="modalVideo" class="modal-video" controls></video>
+    </div>
+    <button class="next">&gt;</button>
+  </div>
+</div>
+
+{% endblock %} {% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.id = "fileInput";
+    fileInput.name = "media";
+    fileInput.style.display = "none";
+    fileInput.multiple = true;
+    document.querySelector(".poster-div form").appendChild(fileInput);
+
+    const fileButton = document.getElementById("fileButton");
+    const fileCountElement = document.getElementById("fileCount");
+    const filePreviewsElement = document.getElementById("filePreviews");
+    const postButton = document.getElementById("postButton");
+    const contentInput = document.getElementById("contentInput");
+
+    const modal = document.getElementById("myModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalVideo = document.getElementById("modalVideo");
+    const closeModal = document.querySelector(".close");
+    const prevButton = document.querySelector(".prev");
+    const nextButton = document.querySelector(".next");
+
+    let mediaFiles = [];
+    let currentIndex = 0;
+
+    fileButton.addEventListener("click", function () {
+      fileInput.click();
+    });
+
+    fileInput.addEventListener("change", function () {
+      const files = fileInput.files;
+      processFiles(files);
+      checkPostButtonState(); // Check button state after files are added
+    });
+
+    contentInput.addEventListener("input", function () {
+      checkPostButtonState(); // Check button state when text input changes
+    });
+
+    function processFiles(files) {
+      Array.from(files).forEach((file) => {
+        if (!mediaFiles.some((media) => media.file === file)) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const previewElement = document.createElement("div");
+            previewElement.style.position = "relative";
+            previewElement.style.width = "50px"; // Adjust size as needed
+            previewElement.style.height = "50px"; // Adjust size as needed
+            previewElement.style.marginRight = "5px";
+            previewElement.style.border = "1px solid #ddd";
+            previewElement.style.display = "inline-block"; // Ensure previews are inline
+
+            let mediaElement;
+            if (file.type.startsWith("image/")) {
+              mediaElement = document.createElement("img");
+              mediaElement.src = e.target.result;
+              mediaElement.className = "thumbnail";
+            } else if (file.type.startsWith("video/")) {
+              mediaElement = document.createElement("img");
+              mediaElement.className = "thumbnail";
+              getVideoThumbnail(file)
+                .then((thumbnailUrl) => {
+                  mediaElement.src = thumbnailUrl;
+                  previewElement.appendChild(mediaElement);
+                  filePreviewsElement.appendChild(previewElement);
+                  updateFileCount(); // Update count when file is added
+                })
+                .catch((err) => {
+                  console.error("Error generating video thumbnail:", err);
+                  mediaElement.src =
+                    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgEBAS8J/oAAAAAASUVORK5CYII="; // Placeholder
+                  previewElement.appendChild(mediaElement);
+                  filePreviewsElement.appendChild(previewElement);
+                  updateFileCount(); // Update count when file is added
+                });
+            }
+
+            // Create and append remove button with Font Awesome icon
+            const removeButton = document.createElement("button");
+            removeButton.innerHTML =
+              '<i class="fa-solid fa-circle-xmark" style="color: #4549ea;"></i>';
+            removeButton.style.position = "absolute";
+            removeButton.style.top = "5px";
+            removeButton.style.right = "5px";
+
+            removeButton.style.border = "none";
+            removeButton.style.borderRadius = "50%";
+            removeButton.style.width = "24px"; // Size of the button
+            removeButton.style.height = "24px"; // Size of the button
+            removeButton.style.display = "flex";
+            removeButton.style.justifyContent = "center";
+            removeButton.style.alignItems = "center";
+            removeButton.style.fontSize = "16px"; // Font size for the icon
+            removeButton.style.cursor = "pointer";
+            removeButton.style.zIndex = "10"; // Ensure button is on top
+            removeButton.addEventListener("click", function () {
+              previewElement.remove(); // Remove the preview element
+              removeFile(file); // Remove the file from mediaFiles array
+              updateFileCount(); // Update count after file is removed
+              checkPostButtonState(); // Check button state after file is removed
+            });
+
+            previewElement.appendChild(mediaElement);
+            previewElement.appendChild(removeButton);
+            filePreviewsElement.appendChild(previewElement);
+
+            mediaFiles.push({
+              src: e.target.result,
+              type: file.type,
+              file: file,
+              element: mediaElement,
+            });
+            addPreviewClickListener(mediaElement, mediaFiles.length - 1);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      updateFileCount(); // Update file count after processing files
+    }
+
+    function removeFile(fileToRemove) {
+      // Remove file from mediaFiles array
+      mediaFiles = mediaFiles.filter((media) => media.file !== fileToRemove);
+
+      // If the current file is removed, update the modal
+      if (mediaFiles.length === 0) {
+        modal.style.display = "none";
+        modalImage.src = "";
+        modalVideo.src = "";
+      } else {
+        // Update the currentIndex if needed
+        if (currentIndex >= mediaFiles.length) {
+          currentIndex = mediaFiles.length - 1;
+        }
+        updateModal();
+      }
+    }
+
+    function addPreviewClickListener(mediaElement, index) {
+      mediaElement.addEventListener("click", function () {
+        modal.style.display = "flex";
+        currentIndex = index;
+        updateModal();
+      });
+    }
+
+    function updateModal() {
+      const currentFile = mediaFiles[currentIndex];
+      if (currentFile.type.startsWith("image/")) {
+        modalImage.src = currentFile.src;
+        modalImage.style.display = "block";
+        modalVideo.style.display = "none";
+      } else if (currentFile.type.startsWith("video/")) {
+        modalVideo.src = currentFile.src;
+        modalVideo.style.display = "block";
+        modalImage.style.display = "none";
+      }
+    }
+
+    function updateFileCount() {
+      const previewItems = filePreviewsElement.querySelectorAll("div"); // Count preview divs
+      fileCountElement.textContent =
+        previewItems.length > 0
+          ? `${previewItems.length} file${
+              previewItems.length > 1 ? "s" : ""
+            } selected`
+          : "No files selected";
+    }
+
+    function getVideoThumbnail(file) {
+      return new Promise((resolve, reject) => {
+        const video = document.createElement("video");
+        video.preload = "metadata";
+        video.src = URL.createObjectURL(file);
+        video.addEventListener("loadedmetadata", () => {
+          video.currentTime = video.duration / 2;
+        });
+        video.addEventListener("seeked", () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          canvas.getContext("2d").drawImage(video, 0, 0);
+          URL.revokeObjectURL(video.src);
+          resolve(canvas.toDataURL("image/png"));
+        });
+        video.addEventListener("error", () => {
+          reject(new Error("Failed to generate video thumbnail"));
+        });
+      });
+    }
+
+    function checkPostButtonState() {
+      const hasText = contentInput.value.trim().length > 0;
+      const hasFiles = fileInput.files.length > 0;
+      postButton.disabled = !(hasText || hasFiles);
+    }
+
+    closeModal.addEventListener("click", function () {
+      modal.style.display = "none";
+      modalImage.src = "";
+      modalVideo.src = "";
+    });
+
+    prevButton.addEventListener("click", function () {
+      currentIndex = (currentIndex - 1 + mediaFiles.length) % mediaFiles.length;
+      updateModal();
+    });
+
+    nextButton.addEventListener("click", function () {
+      currentIndex = (currentIndex + 1) % mediaFiles.length;
+      updateModal();
+    });
+
+    // Initial check to disable the post button
+    checkPostButtonState();
+  });
+</script>
+{% endblock %}

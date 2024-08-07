@@ -1,0 +1,50 @@
+.home-s-2 {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+  .container {
+    @include home_post_container;
+    border: 1px solid #ebebd8;
+    .post-user {
+      display: flex;
+      align-items: center;
+      img {
+        width: 50px;
+      }
+      h2 {
+        font-family: "Shadows Into Light", cursive;
+        font-size: 15px;
+      }
+    }
+    .post-div {
+      margin-bottom: 10px;
+      .discr-div {
+        p {
+          font-family: "Shadows Into Light", cursive;
+          font-size: 13px;
+        }
+        margin-bottom: 10px;
+      }
+      .post-img-div {
+        img {
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+    }
+    .reaction-div {
+      button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        i {
+          color: $base_color2;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

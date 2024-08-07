@@ -1,0 +1,763 @@
+@charset "UTF-8";
+body {
+  background-color: #ffffea;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: font;
+  @import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+}
+.register-s {
+  padding-top: 10vh;
+}
+.register-s .container {
+  padding: 40px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid rgba(255, 255, 255, 0.049);
+  border-radius: 5px;
+  background: #7376ef;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  gap: 10px;
+}
+.register-s .container h2 {
+  color: white;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 30px;
+}
+.register-s form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.register-s .form-item {
+  width: 100%;
+}
+.register-s .form-item input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: white;
+  color: black;
+  text-align: left;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Shadows Into Light", cursive;
+  font-size: larger;
+  padding: 5px;
+}
+.register-s .form-item .remember-box {
+  margin: auto;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 15px;
+  color: white;
+  display: flex;
+}
+.register-s .form-item .remember-box a {
+  text-decoration: none;
+  color: white;
+  margin-left: 30px;
+}
+.register-s .form-item .remember-box a:hover {
+  color: grey;
+}
+.register-s .submit-button {
+  width: 100%;
+  font-size: 20px;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 15px;
+  color: black;
+  background: #efed73;
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Shadows Into Light", cursive;
+  border-radius: 5px;
+}
+.register-s .form-btns button:hover {
+  background: #eae745;
+  color: white;
+}
+.register-s a {
+  font-size: 20px;
+  color: #efed73;
+  font-family: "Shadows Into Light", cursive;
+}
+.register-s a:hover {
+  color: black;
+}
+.register-s p {
+  text-align: center;
+  font-size: 20px;
+  font-family: "Shadows Into Light", cursive;
+  color: white;
+}
+
+header {
+  background-color: #ffffea;
+  border-bottom: 1px solid #ebebd8;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  z-index: 100000;
+}
+header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+header .container i {
+  font-size: 20px;
+  color: #7376ef;
+}
+header .container img {
+  width: 60px;
+}
+header .container button {
+  margin: auto;
+  font-size: 20px;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 15px;
+  color: black;
+  background: #efed73;
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Amatic SC", sans-serif, bold;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+header .container button:hover {
+  background-color: #eae745;
+  color: white;
+}
+header .container form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+}
+header .container form input {
+  padding: 5px;
+  border: 2px solid #7376ef;
+  outline: none;
+  border-radius: 10px;
+  width: 100%;
+  height: 60%;
+}
+header .container nav {
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+header .container nav a {
+  padding: 10px;
+  position: relative;
+}
+header .container nav a i {
+  font-size: 20px;
+  color: #7376ef;
+}
+header .container nav a .current-i {
+  color: #efed73;
+}
+header .container nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #7376ef;
+  line-height: 1;
+  transform-origin: middle bottom;
+  transform: scaleX(0);
+  transition: transform 0.14s linear;
+}
+header .container nav a:hover:after,
+header .container nav a:active:after {
+  transform: scaleX(1);
+  transform-origin: middle bottom;
+  transition: transform 0.14s linear;
+}
+
+.login-s {
+  padding-top: 10vh;
+}
+.login-s .container {
+  padding: 40px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  border: 2px solid rgba(255, 255, 255, 0.049);
+  border-radius: 5px;
+  background: #7376ef;
+  border-bottom: 5px solid black;
+  border-right: 5px solid black;
+  gap: 10px;
+}
+.login-s .container h2 {
+  color: white;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 30px;
+}
+.login-s form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.login-s .form-item {
+  width: 100%;
+}
+.login-s .form-item input {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: white;
+  color: black;
+  text-align: left;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Shadows Into Light", cursive;
+  font-size: larger;
+  padding: 5px;
+}
+.login-s .remember-box {
+  margin: auto;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 15px;
+  color: white;
+  display: flex;
+}
+.login-s .remember-label {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin-left: 3px;
+  font-family: "Shadows Into Light", cursive;
+}
+.login-s .submit-button {
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  background-color: #efed73;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  width: 100%;
+  font-size: 20px;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 15px;
+  color: black;
+  background: #efed73;
+  cursor: pointer;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Shadows Into Light", cursive;
+  border-radius: 5px;
+}
+.login-s .submit-button:hover {
+  background-color: #eae745;
+  color: white;
+}
+.login-s .form-btns button:hover {
+  background: #eae745;
+  color: white;
+}
+.login-s a {
+  font-size: 20px;
+  color: #efed73;
+  font-family: "Shadows Into Light", cursive;
+}
+.login-s a:hover {
+  color: black;
+}
+.login-s p {
+  text-align: center;
+  font-size: 20px;
+  font-family: "Shadows Into Light", cursive;
+  color: white;
+}
+
+.main-pg-s {
+  padding: 40px;
+}
+.main-pg-s .container {
+  width: 1200px;
+  margin: 0 auto;
+}
+.main-pg-s .container h1 {
+  font-size: 70px;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  color: #7376ef;
+}
+.main-pg-s .container .welcome-div {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.main-pg-s .container .welcome-div img {
+  width: 400px;
+}
+.main-pg-s .container .welcome-div ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.main-pg-s .container .welcome-div ul li {
+  font-size: 50px;
+  font-family: "Shadows Into Light", cursive;
+  list-style-type: "✨";
+}
+.main-pg-s .container .join_us-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.main-pg-s .container .join_us-div .btn-d {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-pg-s .container .join_us-div .btn-d button {
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  background-color: #efed73;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+}
+.main-pg-s .container .join_us-div .btn-d button:hover {
+  background-color: #eae745;
+  color: white;
+}
+.main-pg-s .container .join_us-div .btn-d button a:hover {
+  color: white;
+}
+
+.home-s-1 {
+  padding-top: 100px;
+  margin-bottom: 20px;
+}
+.home-s-1 .container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffc0;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-s-1 .container img {
+  max-width: 400px;
+}
+.home-s-1 .container .poster-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-s-1 .container .poster-div img {
+  max-width: 50px;
+}
+.home-s-1 .container .poster-div form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-self: center;
+  padding: 5px;
+  gap: 10px;
+}
+.home-s-1 .container .poster-div form textarea {
+  resize: none;
+  height: 40px;
+  border: 2px solid rgba(225, 222, 222, 0.4117647059);
+  border-radius: 5px;
+  background: white;
+  color: black;
+  text-align: left;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 15px;
+  outline: none;
+  border: none;
+  align-self: center;
+  width: 75%;
+  padding: 5px;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+.home-s-1 .container .poster-div form button {
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  background-color: #efed73;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  padding: 5px;
+  align-self: center;
+  border: none;
+  color: #7376ef;
+  background: #efed73;
+  cursor: pointer;
+}
+.home-s-1 .container .poster-div form button:hover {
+  background-color: #eae745;
+  color: white;
+}
+.home-s-1 .container .poster-div form button i {
+  color: #7376ef;
+  align-self: center;
+  cursor: pointer;
+}
+.home-s-1 .container .poster-div form button i:hover {
+  color: white;
+}
+.home-s-1 .container .poster-div form .post-button {
+  border: none;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  background-color: #efed73;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: "Shadows Into Light", cursive;
+  text-align: center;
+  padding: 5px 10px;
+  align-self: center;
+  border: none;
+  color: #7376ef;
+  cursor: pointer;
+}
+.home-s-1 .container .poster-div form .post-button:hover {
+  background-color: #eae745;
+  color: white;
+}
+
+.file-upload-container {
+  margin-top: 10px;
+}
+.file-upload-container #fileCount {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 15px;
+  text-align: center;
+}
+.file-upload-container #filePreviews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.file-previews div {
+  position: relative;
+}
+
+.file-previews button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.thumbnail {
+  width: 50px; /* Thumbnail size */
+  height: 50px; /* Thumbnail size */
+  background-color: #ddd; /* Light grey background */
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #ddd; /* Optional border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.thumbnail::after {
+  content: "\f144"; /* Font Awesome play icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #333; /* Play icon color */
+  font-size: 24px; /* Play icon size */
+}
+
+.home-s-2 {
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+.home-s-2 .container {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #ffffc0;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #ebebd8;
+}
+.home-s-2 .container .post-user {
+  display: flex;
+  align-items: center;
+}
+.home-s-2 .container .post-user img {
+  width: 50px;
+}
+.home-s-2 .container .post-user h2 {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 15px;
+}
+.home-s-2 .container .post-div {
+  margin-bottom: 10px;
+}
+.home-s-2 .container .post-div .discr-div {
+  margin-bottom: 10px;
+}
+.home-s-2 .container .post-div .discr-div p {
+  font-family: "Shadows Into Light", cursive;
+  font-size: 13px;
+}
+.home-s-2 .container .post-div .post-img-div img {
+  width: 100%;
+  border-radius: 5px;
+}
+.home-s-2 .container .reaction-div button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+.home-s-2 .container .reaction-div button i {
+  color: #7376ef;
+  font-size: 20px;
+}
+
+.user-pf-s-1 {
+  padding-top: 100px;
+}
+.user-pf-s-1 .container {
+  width: 80%;
+  margin: 0 auto;
+}
+.user-pf-s-1 .container .user-banner {
+  width: 100%;
+}
+.user-pf-s-1 .container .user-banner .banner {
+  background-color: #eae745;
+  width: 100%;
+  height: 400px;
+  border-radius: 5px;
+  position: relative;
+}
+.user-pf-s-1 .container .user-banner .banner img {
+  width: 300px;
+  position: absolute;
+  top: 30%;
+  right: 70%;
+}
+
+.prf-s-1 {
+  padding-top: 50px;
+}/*# sourceMappingURL=global.css.map */

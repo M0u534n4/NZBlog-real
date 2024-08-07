@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %}
+<h1>{{ user.username }}'s Profile</h1>
+
+<section class="home-s-2">
+  {% for post in posts.items %}
+  <div class="container">
+    <div class="post-user">
+      <img
+        src="{{ url_for('static', filename='images/user_male.png') }}"
+        alt=""
+      />
+      <h2>{{ post.author.username }}</h2>
+    </div>
+    <div class="post-div">
+      <div class="discr-div">
+        <p>{{ post.content }}</p>
+      </div>
+      {% if post.image_file %}
+      <div class="post-img-div">
+        <img
+          src="{{ url_for('static', filename='uploads/' + post.image_file) }}"
+          alt="Post Image"
+        />
+      </div>
+      {% elif post.video_file %}
+      <div class="post-video-div">
+        <video controls>
+          <source
+            src="{{ url_for('static', filename='uploads/' + post.video_file) }}"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      {% endif %}
+    </div>
+    <div class="reaction-div">
+      <button><i class="fa-regular fa-heart"></i></button>
+      <button><i class="fa-regular fa-comment"></i></button>
+      <button><i class="fa-solid fa-share"></i></button>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+
+<div class="pagination">
+  {% for page_num in posts.iter_pages() %} {% if page_num %}
+  <a
+    href="{{ url_for('user_profile', username=user.username, page=page_num) }}"
+    class="btn {% if posts.page == page_num %}active{% endif %}"
+    >{{ page_num }}</a
+  >
+  {% else %} ... {% endif %} {% endfor %}
+</div>
+{% endblock %}

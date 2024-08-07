@@ -1,0 +1,150 @@
+.home-s-1 {
+  padding-top: 100px;
+  margin-bottom: 20px;
+
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #ffffc0;
+    border-bottom: 2px solid black;
+    border-right: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      max-width: 400px;
+    }
+
+    .poster-div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      img {
+        max-width: 50px;
+      }
+
+      form {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+        padding: 5px;
+        gap: 10px;
+
+        textarea {
+          resize: none;
+          height: 40px;
+          border: 2px solid #e1dede69;
+          border-radius: 5px;
+          background: white;
+          color: black;
+          text-align: left;
+
+          border-bottom: 2px solid black;
+          border-right: 2px solid black;
+          font-family: $main_font;
+          font-size: 15px;
+          outline: none;
+          border: none;
+          align-self: center;
+          width: 75%;
+          padding: 5px;
+          white-space: nowrap; /* Prevent text from wrapping */
+        }
+
+        button {
+          @include main_button;
+          padding: 5px;
+          align-self: center;
+          border: none;
+          color: $base_color2;
+          background: $base_color;
+          cursor: pointer;
+          i {
+            color: $base_color2;
+            align-self: center;
+            cursor: pointer;
+            &:hover {
+              color: white;
+            }
+          }
+        }
+
+        .post-button {
+          @include main_button;
+          padding: 5px 10px;
+          align-self: center;
+          border: none;
+          color: $base_color2;
+
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.file-upload-container {
+  margin-top: 10px;
+
+  #fileCount {
+    font-family: $main_font;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  #filePreviews {
+    display: flex;
+    flex-wrap: wrap; // Allows multiple images to wrap to the next line
+    gap: 5px; // Space between images
+    margin-top: 5px;
+  }
+}
+
+.file-previews div {
+  position: relative; // Ensure position is relative for the remove button positioning
+}
+
+.file-previews button {
+  position: absolute;
+  top: 5px; // Adjust positioning if needed
+  right: 5px; // Adjust positioning if needed
+  background-color: transparent; // Transparent background
+  border: none;
+  border-radius: 50%;
+  width: 24px; // Adjust size as needed
+  height: 24px; // Adjust size as needed
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px; // Font size for the icon
+  cursor: pointer;
+  z-index: 10; // Ensure it sits above the preview
+}
+
+.thumbnail {
+  width: 50px; /* Thumbnail size */
+  height: 50px; /* Thumbnail size */
+  background-color: #ddd; /* Light grey background */
+  position: relative;
+  cursor: pointer;
+  border: 1px solid #ddd; /* Optional border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.thumbnail::after {
+  content: "\f144"; /* Font Awesome play icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #333; /* Play icon color */
+  font-size: 24px; /* Play icon size */
+}
