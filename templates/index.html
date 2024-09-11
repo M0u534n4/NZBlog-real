@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% set hide_header = true %} {% block title
+%}Welcome{% endblock %} {% block content %}
+<section class="main-pg-s">
+  <div class="container">
+    <h1>Welcome</h1>
+
+    <div class="join_us-div">
+      <h1>Join Us</h1>
+      <div class="btn-d">
+        <button><a href="{{ url_for('login') }}">Login</a></button>
+        <h2>Or</h2>
+        <button><a href="{{ url_for('register') }}">Sign Up</a></button>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

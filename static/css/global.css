@@ -760,4 +760,21 @@ header .container nav a:active:after {
 
 .prf-s-1 {
   padding-top: 50px;
+}
+
+.main-pg-s {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-pg-s .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+.main-pg-s .container h1 {
+  font-size: 72px;
 }/*# sourceMappingURL=global.css.map */

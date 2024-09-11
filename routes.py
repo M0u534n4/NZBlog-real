@@ -43,7 +43,7 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
     form = PostForm()
@@ -75,3 +75,7 @@ def user_profile(username):
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(author=user).order_by(Post.timestamp.desc()).paginate(page=page, per_page=5)
     return render_template('user_profile.html', user=user, posts=posts)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
